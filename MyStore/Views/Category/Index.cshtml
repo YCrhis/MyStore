@@ -1,0 +1,37 @@
+﻿@model List<CategoryVM>
+
+<div class="row justify-content-between mt-4">
+    <div class="col-4">
+        <h4>Categories</h4>
+    </div>
+    <div class="col-4 text-end">
+        <a href="#" class="btn btn-success"><i class="fa-solid fa-plus"></i> Create New</a>
+    </div>
+</div>
+<hr />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int index = 1; }
+        @foreach (var category in Model)
+        {
+            <tr>
+                <th scope="row">@index</th>
+                <td>@category.Name</td>
+                <td style="width:220px">
+                    <a href="#" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+
+                </td>
+            </tr>
+            index++;
+        }
+    </tbody>
+</table>

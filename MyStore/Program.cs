@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using MyStore.Context;
+using MyStore.Repositories;
+using MyStore.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlString")));
+
+builder.Services.AddScoped(typeof(GenericRepository<>));
+builder.Services.AddScoped<CategoryService>();
+
 
 var app = builder.Build();
 

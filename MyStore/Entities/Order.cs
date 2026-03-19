@@ -7,6 +7,6 @@
         public int UserId { get; set; }
         public decimal TotalAmount { get; set; }
         public User? User { get; set; }
-        public ICollection<OrderItem> OrdenItem { get; set; }
+        public ICollection<OrderItem> OrdenItems { get; set; }
     }
 }
