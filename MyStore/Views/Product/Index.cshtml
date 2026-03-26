@@ -1,11 +1,11 @@
-﻿@model List<CategoryVM>
+﻿@model List<ProductVM>
 
 <div class="row justify-content-between mt-4">
     <div class="col-4">
-        <h4>Categories</h4>
+        <h4>Products</h4>
     </div>
     <div class="col-4 text-end">
-        <a href="/Category/AddEdit" class="btn btn-success"><i class="fa-solid fa-plus"></i> Create New</a>
+        <a href="/Product/AddEdit" class="btn btn-success"><i class="fa-solid fa-plus"></i> Create New</a>
     </div>
 </div>
 <hr />
@@ -15,6 +15,9 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -22,20 +25,22 @@
         @{
             int index = 1;
         }
-        @foreach (var category in Model)
+        @foreach (var product in Model)
         {
             <tr>
                 <th scope="row">@index</th>
-                <td>@category.Name</td>
+                <td>@product.Name</td>
+                <td>@product.Category.Name</td>
+                <td>@product.Price</td>
+                <td>@product.Stock</td>
                 <td style="width:220px">
-                    <a href="/Category/AddEdit/@category.CategoryId" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
+                    <a href="/Product/AddEdit/@product.ProductId" class="btn btn-warning"><i class="fa-solid fa-pen"></i></a>
                     <button class="btn btn-danger"
-                            data-name="@category.Name"
-                            data-id="@category.CategoryId"
+                            data-name="@product.Name"
+                            data-id="@product.ProductId"
                             onclick="deleteItem(this)">
                         <i class="fa-solid fa-trash-can"></i>
                     </button>
-
                 </td>
             </tr>
             index++;
@@ -49,7 +54,7 @@
         const id = btn.getAttribute("data-id");
 
         if(confirm("Do you want to delete " + name + "?")){
-            window.location.href = '@Url.Action("Delete", "Category")' + '?id=' + id;
+            window.location.href = '@Url.Action("Delete", "Product")' + '?id=' + id;
         }
     }
 </script>
