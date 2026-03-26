@@ -170,7 +170,7 @@ namespace MyStore.Services
             };
 
             if (categoryId != 0) conditions.Add(x => x.CategoryId == categoryId);
-            if (string.IsNullOrEmpty(search)) conditions.Add(x => x.Name.Contains(search) || x.Description.Contains(search));
+            if (!string.IsNullOrEmpty(search)) conditions.Add(x => x.Name.Contains(search) || x.Description.Contains(search));
 
             var products = await _productRepository.GetAllAsync(
                 conditions: conditions.ToArray()

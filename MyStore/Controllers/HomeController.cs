@@ -26,6 +26,27 @@ namespace MyStore.Controllers
             return View(catalogVM);
         }
 
+        public async Task<IActionResult> FilterByCategory(int id , string name)
+        {
+            var categories = await _categoryService.GetAllAsync();
+            var products = await _productService.GetCatalogAsync(categoryId:id);
+            var catalogVM = new CatalogVM {Categories = categories, Products = products, FilterBy=name };
+            return View("Index",catalogVM);
+        }
+        [HttpPost]
+        public async Task<IActionResult> FilterBySearch(string value)
+        {
+            var categories = await _categoryService.GetAllAsync();
+            var products = await _productService.GetCatalogAsync(search: value);
+            var catalogVM = new CatalogVM { Categories = categories, Products = products, FilterBy = $"Results for: {value}" };
+            return View("Index", catalogVM);
+        }
+
+        public async Task<IActionResult> ProductDetail(int id)
+        {
+            var product = await _productService.GetByIdAsync(id);
+            return View(product);
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -36,5 +57,6 @@ namespace MyStore.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

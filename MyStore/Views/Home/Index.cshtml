@@ -11,27 +11,38 @@
     </div>
 
     <div class="col-sm-12 col-md-3 col-lg-3">
-        <div class="input-group">
-            <input type="text" class="form-control" autocomplete="off"/> 
-            <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        <form action="/Home/FilterBySearch" method="post">
+            <div class="input-group">
+                <input type="text" class="form-control" name="value" autocomplete="off" placeholder="What are you looking for?" />
+                <button class="btn btn-outline-secondary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </form>
+      
     </div>
 </div>
 
+@if(Model.FilterBy != "" && Model.FilterBy != null)
+{
+    <div class="row bg-light p-2 mt-2">
+        <div class="col-sm-12">@Model.FilterBy</div>
+    </div>
+}
+
 <div class="row row-cols-1 row-cols-sm-2  row-cols-md-4 g-4 py-4">
-    @foreach (var categor in Model.Categories)
+    @foreach (var p in Model.Products)
     {
         <div class="col">
             <div class="card shadow-sm">
-                <img alt="Product" class="card-img-top" src=""/>
+                <img alt="Product" class="card-img-top" src="~/images/@p.ImageName"/>
                 <div class="card-body p-4">
                     <div class="text-center">
-                        <h5 class="fw-bolder">@categor.Name</h5>
+                        <h5 class="fw-bolder">@p.Name</h5>
+                        @p.Price.ToString("C2")
                     </div>
                 </div>
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center">
-                        <a class="btn btn-outline-dark mt-auto" href="#" role="button">View Detail</a>
+                        <a class="btn btn-outline-dark mt-auto" href="/Home/ProductDetail?id=@p.ProductId" role="button">View Detail</a>
                     </div>
                 </div>
             </div>
@@ -49,10 +60,13 @@
             </div>
             <div class="modal-body">
                 <div class="row row-cols-2 g-2">
+                    <div class="col d-grid">
+                        <a class="btn btn-outline-dark" asp-route-id="0" asp-route-name="All Categories">All Categories</a>
+                    </div>
                     @foreach (var categor in Model.Categories)
                     {
                         <div class="col d-grid">
-                            <a class="btn btn-outline-dark">@categor.Name</a>
+                            <a asp-controller="Home" asp-action="FilterByCategory" asp-route-id="@categor.CategoryId" asp-route-name="@categor.Name" class="btn btn-outline-dark">@categor.Name</a>
                         </div>
                     }
                 </div>
