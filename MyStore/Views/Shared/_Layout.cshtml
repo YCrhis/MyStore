@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyStore</title>
+    <title>BakSTore</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -12,35 +12,78 @@
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">MyStore</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- SIDEBAR -->
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark position-sticky top-0 vh-100">
+            
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white">
+                
+                    <!-- Logo -->
+                    <a asp-controller="Home" asp-action="Index"
+                           class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline fw-bold fs-3 textMain">BackStore</span>
+                    </a>
+
+                    <!-- Menu -->
+                    <ul class="nav nav-pills flex-column mb-auto align-items-center align-items-sm-start">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a asp-controller="Home" asp-action="Index"
+                                   class="nav-link text-white d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-house"></i> <span>Home</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+
+                        <li>
+                            <a asp-controller="Product" asp-action="Index"
+                                   class="nav-link text-white d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-tag"></i> <span>Products</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+
+                        <li>
+                            <a asp-controller="Category" asp-action="Index"
+                                   class="nav-link text-white d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-list"></i> <span>Category</span>
+                            </a>
                         </li>
                     </ul>
+
+                    <!-- User -->
+                    <div class="dropdown pb-4 mt-5">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                            <span class="d-none d-sm-inline mx-1">loser</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#">New project...</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <!-- MAIN -->
+            <div class="col py-3">
+                <div class="container">
+                    <main class="pb-3">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
     </div>
+
+
+
+   
 
     <footer class="border-top footer text-muted">
         <div class="container">
