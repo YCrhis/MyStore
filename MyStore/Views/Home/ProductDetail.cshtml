@@ -16,7 +16,7 @@
 
                 @Html.Raw(Model.Description)
 
-                <form>
+                <form action="/Home/AddItemToCart" method="post">
                     <div class="d-flex align-items-center" gap-3>
                         <input hidden name="ProductId" asp-for="@Model.ProductId" />
                         <input class="form-control text-center py-2"
@@ -29,6 +29,13 @@
                         <a href="/Home/Index" class="btn btn-warning flex-md-shrink-0 px-4">Back</a>
                     </div>
                 </form>
+
+                @if(ViewBag.message != null)
+                {
+                    <div class="alert alert-success mt-4" role="alert">
+                        @ViewBag.message
+                    </div>
+                }
 
             </div>
 
