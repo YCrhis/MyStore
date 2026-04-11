@@ -3,6 +3,7 @@ using MyStore.Models;
 using MyStore.Services;
 using MyStore.Utilities;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace MyStore.Controllers
 {
@@ -86,10 +87,9 @@ namespace MyStore.Controllers
         {
             var cart = HttpContext.Session.SessionGet<List<CartItemVM>>("Cart") ?? [];
 
-            //TODO: change id
-            int userId = 1;
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
 
-            await _orderService.AddAsync(cart, userId);
+            await _orderService.AddAsync(cart, int.Parse(userId));
 
             HttpContext.Session.Remove("Cart");
             return View("SaleComplete");

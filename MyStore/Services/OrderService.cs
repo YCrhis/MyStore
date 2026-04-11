@@ -8,7 +8,7 @@ namespace MyStore.Services
     {
 
         private readonly OrderRepository _Ordenrepository;
-        public OrderService(OrderRepository orderRepository) 
+        public OrderService(OrderRepository orderRepository)
         {
             _Ordenrepository = orderRepository;
         }
@@ -29,6 +29,25 @@ namespace MyStore.Services
             };
 
             await _Ordenrepository.AddAsync(order);
+        }
+
+
+        public async Task<List<OrderVM>> GetAllWithDetailsAsync(int userId)
+        {
+            var oders = await _Ordenrepository.GetAllWithDetailsAsync(userId);
+            var ordersVM = oders.Select(o => new OrderVM()
+            {
+                OrderDate = o.OrderDate.ToString("yyyy-MM-dd"),
+                TotalAmount = o.TotalAmount.ToString("C2"),
+                OrdenItems = o.OrdenItems.Select(oi => new OrdenItemVM()
+                {
+                    Name = oi?.Product.Name,
+                    Quantity = oi.Quantity,
+                    Price = oi.Price.ToString("C")
+                }).ToList()
+            }).ToList();
+
+            return ordersVM;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MyStore.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using MyStore.Context;
 using MyStore.Entities;
 
 namespace MyStore.Repositories
@@ -34,6 +35,17 @@ namespace MyStore.Repositories
                 await transaction.RollbackAsync();
                 throw;
             }
+        }
+
+
+        public async Task<IEnumerable<Order>> GetAllWithDetailsAsync(int userId)
+        {
+            var orders = await _dbContext.Order
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrdenItems)
+                .ThenInclude(x => x.Product)
+                .ToListAsync();
+            return orders;
         }
 
     }

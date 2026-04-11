@@ -12,8 +12,8 @@ using MyStore.Context;
 namespace MyStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260318022601_firstMigration")]
-    partial class firstMigration
+    [Migration("20260411214811_TypeToRole")]
+    partial class TypeToRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

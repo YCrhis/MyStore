@@ -1,0 +1,41 @@
+﻿@model List<OrderVM>
+
+<div class="row justify-content-between mt-4">
+    <div class="col-4">
+        <h4>My Orders</h4>
+    </div>
+</div>
+<hr />
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Order Date</th>
+            <th scope="col">Total Amount</th>
+            <th scope="col">Order Items</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int index = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@index</th>
+                <td>@item.OrderDate</td>
+                <td>@item.TotalAmount</td>
+                <td>
+                    <ol class="list-group list-group-numbered">
+                        @foreach (var element in item.OrdenItems)
+                        {
+                            <li class="list-group-item">@(element.Name + " + " + element.Quantity + " x " + element.Price)</li>
+                        }
+                    </ol>
+                </td>
+            </tr>
+            index++;
+        }
+    </tbody>
+</table>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyStore.Migrations
 {
     /// <inheritdoc />
-    public partial class firstMigration : Migration
+    public partial class TypeToRole : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

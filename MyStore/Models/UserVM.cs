@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MyStore.Entities
+namespace MyStore.Models
 {
-    public class User
+    public class UserVM
     {
-        public int UserId { get; set; }
+        public int UsertId { get; set; }
         [Required]
         public string FullName { get; set; }
         [Required]
@@ -13,8 +12,9 @@ namespace MyStore.Entities
         [Required]
         public string Password { get; set; }
         [Required]
+        public string Password2 { get; set; }
+        [Required]
         public string Type { get; set; }
 
-        public ICollection<Order> Orders { get; set; }
     }
 }

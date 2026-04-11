@@ -35,39 +35,59 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a asp-controller="Product" asp-action="Index"
-                                   class="nav-link text-white d-flex align-items-center gap-2">
-                                <i class="fa-solid fa-tag"></i> <span>Products</span>
-                            </a>
-                        </li>
+                        @if (User.Identity!.IsAuthenticated)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-controller="Product" asp-action="Index"
+                                           class="nav-link text-white d-flex align-items-center gap-2">
+                                        <i class="fa-solid fa-tag"></i> <span>Products</span>
+                                    </a>
+                                </li>
 
-                        <li>
-                            <a asp-controller="Category" asp-action="Index"
-                                   class="nav-link text-white d-flex align-items-center gap-2">
-                                <i class="fa-solid fa-list"></i> <span>Category</span>
-                            </a>
-                        </li>
+                                <li>
+                                    <a asp-controller="Category" asp-action="Index"
+                                           class="nav-link text-white d-flex align-items-center gap-2">
+                                        <i class="fa-solid fa-list"></i> <span>Category</span>
+                                    </a>
+                                </li>
+                            }
+                        }
 
                         @await Html.PartialAsync("_CartButton")
                     </ul>
 
-                    <!-- User -->
-                    <div class="dropdown pb-4 mt-5">
-                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
-                            <span class="d-none d-sm-inline mx-1">loser</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                            <li><a class="dropdown-item" href="#">New project...</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                    @if (User.Identity!.IsAuthenticated)
+                    {
+                        <!-- User -->
+                        <div class="dropdown pb-4 mt-5">
+                            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://github.com/mdo.png" alt="hugenerd" width="30" height="30" class="rounded-circle">
+                                <span class="d-none d-sm-inline mx-1">@User.Identity.Name</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                                <li><a class="dropdown-item" href="/User/MyOrders">My orders</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <ul class="nav nav-pills flex-column mb-auto align-items-center align-items-sm-start">
                             <li>
-                                <hr class="dropdown-divider">
+                                <a href="/Account/Login"
+                                       class="nav-link text-white d-flex align-items-center gap-2">
+                                    <i class="fa-solid fa-tag"></i> <span>Login</span>
+                                </a>
                             </li>
-                            <li><a class="dropdown-item" href="#">Sign out</a></li>
                         </ul>
-                    </div>
+                    }
+
+                    
 
                 </div>
             </div>
